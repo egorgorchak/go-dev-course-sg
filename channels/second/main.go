@@ -22,10 +22,13 @@ func main() {
 	}
 
 	for l := range c {
-		go func(link string) {
+		go func(link string) { //pass copy of l variable in order not to have the same variable (l) in different go routines
 			time.Sleep(5 * time.Second)
 			checkLink(link, c)
 		}(l) //function literal (lambda)
+		//fix in go 1.22
+		//https://go.dev/blog/go1.22
+		//https://go.dev/blog/loopvar-preview
 	}
 }
 
